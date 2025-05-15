@@ -1,0 +1,77 @@
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Pivot Table de Votos</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: center;
+      }
+      th {
+        background-color: #f0f0f0;
+      }
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        padding-top: 0%;
+        padding-bottom: 0%;
+        width: auto;
+        height: auto;
+
+        background: white;
+        overflow: hidden;
+        border-radius: 25px;
+
+        border: 3px solid #edede6;
+        font-size: 5vh;
+        font-family: Helvetica;
+      }
+    </style>
+  </head>
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- jQuery UI CSS (opcional, mas recomendado para estilo dos elementos) -->
+  <link
+    rel="stylesheet"
+    href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
+  />
+
+  <!-- jQuery UI JS (obrigatório para drag and drop) -->
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+
+  <!-- PivotTable.js -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/pivottable@2.23.0/dist/pivot.css"
+  />
+  <script src="https://cdn.jsdelivr.net/npm/pivottable@2.23.0/dist/pivot.min.js"></script>
+
+  <!-- optional: mobile support with jqueryui-touch-punch -->
+  <script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"
+  ></script>
+
+  <!-- Google Charts -->
+  <script
+    type="text/javascript"
+    src="https://www.gstatic.com/charts/loader.js"
+  ></script>
+
+  <!-- Renderers adicionais para PivotTable.js (barchart, heatmap etc.) -->
+  <script src="https://cdn.jsdelivr.net/npm/pivottable@2.23.0/dist/gchart_renderers.min.js"></script>
+
+  <script src="script.js"></script>
+  <body>
+    <h1>Pivot Table</h1>
+    <div id="tabela"></div>
+  </body>
+</html>
