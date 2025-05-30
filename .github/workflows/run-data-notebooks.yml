@@ -1,0 +1,40 @@
+name: Run Notebooks
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'data/src/notebooks/**'
+      - '.github/workflows/run-data-notebooks.yml'
+
+jobs:
+  run-notebooks:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: data
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt || echo "requirements.txt não encontrado"
+          pip install nbconvert ipykernel
+
+      - name: Find and execute all notebooks
+        run: |
+          find src/notebooks -name "*.ipynb" | while read nb; do
+            echo "Executando $nb..."
+            BASENAME=$(basename "$nb")
+            OUTDIR=$(dirname "$nb")
+            OUTFILE="executed-${BASENAME}"
+            jupyter nbconvert --to notebook --execute "$nb" --output "$OUTFILE" --output-dir "$OUTDIR"
+            echo "✔️ $nb executado → $OUTDIR/$OUTFILE"
+          done
