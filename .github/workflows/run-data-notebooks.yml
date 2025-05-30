@@ -31,10 +31,18 @@ jobs:
       - name: Find and execute all notebooks
         run: |
           find src/notebooks -name "*.ipynb" | while read nb; do
-            echo "Executando $nb..."
+            echo "📘 Executando $nb..."
             BASENAME=$(basename "$nb")
             OUTDIR=$(dirname "$nb")
-            OUTFILE="executed-${BASENAME}"
-            jupyter nbconvert --to notebook --execute "$nb" --output "$OUTFILE" --output-dir "$OUTDIR"
-            echo "✔️ $nb executado → $OUTDIR/$OUTFILE"
+            LOGFILE="$OUTDIR/log-${BASENAME%.ipynb}.log"
+
+            jupyter nbconvert \
+              --to notebook \
+              --execute "$nb" \
+              --stdout \
+              --ExecutePreprocessor.timeout=600 \
+              2>&1 | tee "$LOGFILE"
+
+            echo "✅ Execução completa: $nb"
+            echo "📝 Log salvo em: $LOGFILE"
           done
