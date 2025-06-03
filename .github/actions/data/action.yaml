@@ -1,0 +1,7 @@
+name: "Pipeline de ETL"
+
+description: "Action de extração, tratamento e carga dos dados da camara"
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
